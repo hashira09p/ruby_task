@@ -93,6 +93,7 @@ elsif chosen_word == "ADD"
                      name: name,
                      age: age
                    })
+      puts persons
       break
     end
   end
