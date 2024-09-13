@@ -52,10 +52,29 @@ persons = [
   }
 ]
 
-persons.each.with_index do |element, index|
+p "Please input a new national id: "
+id = gets.chomp.to_i
 
-  element.each_with_index do |k, v|
-    p element[:name]
+p "Please input your name: "
+name = gets.chomp
+
+p "Please input your age: "
+age = gets.chomp.to_i
+
+id_exist = persons.any?{|element|element[:national_id] == id}
+
+persons.each do |element|
+  if id_exist
+    p "Failed To add: National ID already exist"
+    break
+  else
+    persons.push({
+                   national_id: id,
+                   name: name,
+                   age: age
+                 })
+    p persons
     break
   end
 end
+
