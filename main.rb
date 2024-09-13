@@ -52,29 +52,49 @@ persons = [
   }
 ]
 
-p "Please input a new national id: "
-id = gets.chomp.to_i
+p "Type Delete or Add"
+chosen_word = gets.chomp.upcase
 
-p "Please input your name: "
-name = gets.chomp
 
-p "Please input your age: "
-age = gets.chomp.to_i
+if chosen_word == "DELETE"
+  p "Input the id you want to delete"
+  deleting_id = gets.chomp.to_i
+  id_exist = persons.any?{|element|element[:national_id] == deleting_id}
+  persons.each_with_index do |element,index|
+    if id_exist
+      p "successfully deleted"
+      persons.delete_at(index)
+      puts persons
+      break
+    else
+      p "user not found"
+      break
+    end
+  end
+elsif chosen_word == "ADD"
+  p "Please input a new national id: "
+  id = gets.chomp.to_i
 
-id_exist = persons.any?{|element|element[:national_id] == id}
+  p "Please input your name: "
+  name = gets.chomp
 
-persons.each do |element|
-  if id_exist
-    p "Failed To add: National ID already exist"
-    break
-  else
-    persons.push({
-                   national_id: id,
-                   name: name,
-                   age: age
-                 })
-    p persons
-    break
+  p "Please input your age: "
+  age = gets.chomp.to_i
+
+  id_exist = persons.any?{|element|element[:national_id] == id}
+
+  persons.each do |element|
+    if  id_exist
+      p "Failed To add: National ID already exist"
+      break
+    else
+      persons.push({
+                     national_id: id,
+                     name: name,
+                     age: age
+                   })
+      break
+    end
   end
 end
 
