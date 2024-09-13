@@ -131,5 +131,17 @@ persons = [
   }
 ]
 
-puts persons.last(20)
+p "input an id to search or name"
+name_or_id = gets.chomp
+status = "Users not Found"
 
+persons.each.with_index do |element, index|
+  if element[:name] == name_or_id || element[:national_id] == name_or_id.to_i
+    status = element
+    break
+  else
+    status = "User not Found"
+  end
+end
+
+puts status
