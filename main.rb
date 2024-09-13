@@ -49,74 +49,87 @@ persons = [
     national_id: 10,
     name: "Ruben",
     age: "54"
+  },
+  {
+    national_id: 11,
+    name: "Jarl",
+    age: "24"
+  },
+  {
+    national_id: 12,
+    name: "Matt",
+    age: "40"
+  },
+  {
+    national_id: 13,
+    name: "Jude",
+    age: "50"
+  },
+  {
+    national_id: 14,
+    name: "Shan",
+    age: "17"
+  },
+  {
+    national_id: 15,
+    name: "JV",
+    age: "22"
+  },
+  {
+    national_id: 16,
+    name: "Jessy",
+    age: "21"
+  },
+  {
+    national_id: 17,
+    name: "Jazz",
+    age: "24"
+  },
+  {
+    national_id: 18,
+    name: "Rick",
+    age: "24"
+  },
+  {
+    national_id: 19,
+    name: "Ted",
+    age: "24"
+  },
+  {
+    national_id: 20,
+    name: "Jack",
+    age: "54"
+  },{
+    national_id: 21,
+    name: "Joshua",
+    age: "22"
+  },
+  {
+    national_id: 22,
+    name: "Rio",
+    age: "21"
+  },
+  {
+    national_id: 23,
+    name: "Jett",
+    age: "24"
+  },
+  {
+    national_id: 24,
+    name: "Phoenix",
+    age: "24"
+  },
+  {
+    national_id: 25,
+    name: "Helena",
+    age: "24"
+  },
+  {
+    national_id: 26,
+    name: "Kathlene",
+    age: "54"
   }
 ]
 
-p "Want to add or delete> please type Y/N"
-input = gets.chomp.upcase
-start = false
-
-if input == "Y"
-  start = true
-end
-
-while start
-  p "Type Delete or Add"
-  chosen_word = gets.chomp.upcase
-
-
-  if chosen_word == "DELETE"
-    p "Input the id you want to delete"
-    deleting_id = gets.chomp.to_i
-    id_exist = persons.any?{|element|element[:national_id] == deleting_id}
-
-    persons.each_with_index do |element,index|
-      if persons[index][:national_id] == deleting_id
-        persons.delete_at(index)
-        p "successfully deleted"
-        puts persons
-        break
-      else
-        p "user not found"
-      end
-    end
-  elsif chosen_word == "ADD"
-
-    p "Please input a new national id: "
-    id = gets.chomp.to_i
-
-    p "Please input your name: "
-    name = gets.chomp
-
-    p "Please input your age: "
-    age = gets.chomp.to_i
-
-    id_exist = persons.any?{|element|element[:national_id] == id}
-
-    persons.each do |element|
-      if  id_exist
-        p "Failed To add: National ID already exist"
-        break
-      else
-        persons.push({
-                       national_id: id,
-                       name: name,
-                       age: age
-                     })
-        puts persons
-        break
-      end
-    end
-  end
-
-  p "Do you want to continue? Please type Y/N"
-  want_to_continue = gets.chomp.upcase
-
-  if want_to_continue == "Y"
-    start = true
-  else
-    start = false
-  end
-end
-
+puts persons.last(20)
 
