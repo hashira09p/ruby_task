@@ -171,7 +171,36 @@ def add(data)
   puts data
 end
 
+# DELETE  Function
+def delete(data)
+  puts "Input an ID to delete: "
+  id_input = gets.to_i
 
+  found = data.find { |element|  element[:national_id] == id_input}
+  target_id = "User not found." unless found
+
+  if found
+    data.each do |element|
+      data.delete_at(id_input) if element[:national_id] == id_input
+      break
+    end
+    puts "Successfully deleted"
+  else
+    puts target_id
+  end
+
+  puts "Updated Data: "
+  puts data
+end
+
+case chosen_action
+when 1
+  add(persons)
+when 2
+  delete(persons)
+else
+  p "Hello World"
+end
 
 
 
