@@ -131,17 +131,47 @@ persons = [
   }
 ]
 
-p "input an id to search or name"
-name_or_id = gets.chomp
-status = "Users not Found"
+puts persons.first(20)
 
-persons.each.with_index do |element, index|
-  if element[:name] == name_or_id || element[:national_id] == name_or_id.to_i
-    status = element
-    break
+puts "[1] ADD"
+puts "[2] DELETE"
+puts "[3] EDIT"
+puts "[4] SEARCH"
+
+chosen_action = gets.chomp.to_i
+
+# ADD Function
+def add(data)
+  puts "Please input an ID"
+  id_input = gets.to_i
+
+  #Checking if the id_input is already exist
+  found = data.find { |element|  element[:national_id] == id_input}
+  target_id = "Failed to add: National ID already exists." if data
+
+  #If not Input a new id,name and age
+  if !target_id
+
+    puts "Please input your name"
+    new_name = gets.chomp
+
+    puts "Please input your age"
+    new_age = gets.to_i
+
+    data.push({
+                national_id: id_input,
+                name: new_name,
+                age: new_age
+              })
+
   else
-    status = "User not Found"
+    p target_id
   end
+
+  puts data
 end
 
-puts status
+
+
+
+
