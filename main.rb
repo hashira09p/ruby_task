@@ -162,8 +162,7 @@ def add(data)
     puts target_id
 
   end
-  puts data
-  puts ""
+  puts data.last(5)
 end
 
 # DELETE  Function
@@ -178,7 +177,7 @@ def delete(data)
   p "Successfully Deleted"
 
   puts "Updated Data: "
-  puts data
+  puts data.first(5)
 
 end
 
@@ -191,14 +190,41 @@ def edit(data)
   puts "Please input the changes you want in your name:"
   new_name = gets.chomp
 
-  puts "Please input the changes you want in your name:"
+  puts "Please input the changes you want in your age:"
   new_age = gets.chomp.to_i
 
   if person
     person[:name] = new_name
     person[:age] = new_age
   end
-  puts data
+  puts person
+end
+
+def search(data)
+  puts "Please input your 1(name) or 2(id)"
+  user_input = gets.chomp.to_i
+
+  case user_input
+  when 1
+    puts "Please input your name"
+    name = gets.chomp
+    person = data.find {|element| element[:name] == name}
+    if person
+      puts person
+    else
+      puts "User not Found."
+    end
+
+  when 2
+    puts "Please input your id"
+    id = gets.chomp.to_i
+    person = data.find {|element| element[:national_id] == id}
+    if person
+      puts person
+    else
+      puts "User not Found."
+    end
+  end
 end
 
 
