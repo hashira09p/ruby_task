@@ -133,13 +133,7 @@ persons = [
 
 puts persons.first(20)
 
-puts "[1] ADD"
-puts "[2] DELETE"
-puts "[3] EDIT"
-puts "[4] SEARCH"
-
-chosen_action = gets.chomp.to_i
-
+continue = true
 # ADD Function
 def add(data)
   puts "Please input an ID"
@@ -147,10 +141,10 @@ def add(data)
 
   #Checking if the id_input is already exist
   found = data.find { |element|  element[:national_id] == id_input}
-  target_id = "Failed to add: National ID already exists." if data
+  target_id = "Failed to add: National ID already exists." if found
 
   #If not Input a new id,name and age
-  if !target_id
+  unless target_id
 
     puts "Please input your name"
     new_name = gets.chomp
@@ -165,10 +159,11 @@ def add(data)
               })
 
   else
-    p target_id
-  end
+    puts target_id
 
+  end
   puts data
+  puts ""
 end
 
 # DELETE  Function
@@ -177,30 +172,69 @@ def delete(data)
   id_input = gets.to_i
 
   found = data.find { |element|  element[:national_id] == id_input}
-  target_id = "User not found." unless found
+  p "User not found." unless found
 
-  if found
-    data.each do |element|
-      data.delete_at(id_input) if element[:national_id] == id_input
-      break
-    end
-    puts "Successfully deleted"
-  else
-    puts target_id
-  end
+  data.delete_at(id_input-1)
+  p "Successfully Deleted"
 
   puts "Updated Data: "
   puts data
+
 end
 
-case chosen_action
-when 1
-  add(persons)
-when 2
-  delete(persons)
-else
-  p "Hello World"
+def edit(data)
+  puts "Please input your ID to edit"
+  user_id = gets.to_i
+
+  person = data.find { |element| element[:national_id] == user_id }
+
+  puts "Please input the changes you want in your name:"
+  new_name = gets.chomp
+
+  puts "Please input the changes you want in your name:"
+  new_age = gets.chomp.to_i
+
+  if person
+    person[:name] = new_name
+    person[:age] = new_age
+  end
+  puts data
 end
+
+
+
+while continue
+  puts "[1] ADD"
+  puts "[2] DELETE"
+  puts "[3] EDIT"
+  puts "[4] SEARCH"
+  chosen_action = gets.chomp.to_i
+
+  case chosen_action
+  when 1
+    add(persons)
+    p "Do You want to exit? Press Y/N."
+    decision = gets.chomp.upcase
+    continue = false if decision == "Y"
+  when 2
+    delete(persons)
+    p "Do You want to exit? Press Y/N."
+    decision = gets.chomp.upcase
+    continue = false if decision == "Y"
+  when 3
+    edit(persons)
+    p "Do You want to exit? Press Y/N."
+    decision = gets.chomp.upcase
+    continue = false if decision == "Y"
+  when 4
+    search(persons)
+    p "Do You want to exit? Press Y/N."
+    decision = gets.chomp.upcase
+    continue = false if decision == "Y"
+  end
+end
+
+
 
 
 
