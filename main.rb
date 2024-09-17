@@ -137,10 +137,10 @@ continue = true
 # ADD Function
 def add(data)
   puts "Please input an ID"
-  id_input = gets.to_i
+  id_input = gets.chomp.to_i
 
   #Checking if the id_input is already exist
-  found = data.find { |element|  element[:national_id] == id_input}
+  found = data.find { |element|  element[:national_id] === id_input}
   target_id = "Failed to add: National ID already exists." if found
 
   #If not Input a new id,name and age
@@ -157,7 +157,6 @@ def add(data)
                 name: new_name,
                 age: new_age
               })
-
   else
     puts target_id
 
@@ -168,17 +167,18 @@ end
 # DELETE  Function
 def delete(data)
   puts "Input an ID to delete: "
-  id_input = gets.to_i
+  id_input = gets.chomp.to_i
 
   found = data.find { |element|  element[:national_id] == id_input}
   p "User not found." unless found
 
-  data.delete_at(id_input-1)
+  index = data.find_index(found)
+
+  data.delete_at(index)
   p "Successfully Deleted"
 
   puts "Updated Data: "
   puts data.first(5)
-
 end
 
 # Edit Function
