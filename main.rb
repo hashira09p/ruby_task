@@ -181,6 +181,7 @@ def delete(data)
 
 end
 
+# Edit Function
 def edit(data)
   puts "Please input your ID to edit"
   user_id = gets.to_i
@@ -200,6 +201,7 @@ def edit(data)
   puts person
 end
 
+#Search Function
 def search(data)
   puts "Please input your 1(name) or 2(id)"
   user_input = gets.chomp.to_i
