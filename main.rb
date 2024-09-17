@@ -242,21 +242,25 @@ while continue
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
     continue = false if decision == "Y"
+    system("Clear") || system("cls")
   when 2
     delete(persons)
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
     continue = false if decision == "Y"
+    system("Clear") || system("cls")
   when 3
     edit(persons)
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
     continue = false if decision == "Y"
+    system("Clear") || system("cls")
   when 4
     search(persons)
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
     continue = false if decision == "Y"
+    system("Clear") || system("cls")
   end
 end
 
