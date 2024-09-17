@@ -172,13 +172,13 @@ def delete(data)
   found = data.find { |element|  element[:national_id] == id_input}
   p "User not found." unless found
 
-  index = data.find_index(found)
+  if found
+    data.delete(found)
+    p "Successfully Deleted"
 
-  data.delete_at(index)
-  p "Successfully Deleted"
-
-  puts "Updated Data: "
-  puts data.first(5)
+    puts "Updated Data: "
+    puts data.first(5)
+  end
 end
 
 # Edit Function
