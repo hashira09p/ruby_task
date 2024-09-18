@@ -1,5 +1,6 @@
-require './person.rb'
-people = [
+=begin
+# Creating an array of people
+persons = [
   {
     national_id: 1,
     name: "Jerome",
@@ -131,78 +132,77 @@ people = [
   }
 ]
 
-people.each do |element|
-  person = Person.new
-  person.name = element[:name]
-  person.age = element[:age]
-  person.id_number = element[:national_id]
-  person.save
-end
+puts persons.first(20)
 
+continue = true
 # ADD Function
-def add
+def add(data)
   puts "Please input an ID"
-  person = Person.new
-  person.id_number = gets.chomp.to_i
+  id_input = gets.chomp.to_i
+
   #Checking if the id_input is already exist
-  target_id = "Failed to add: National ID already exists." if Person.find_by_national_id(person.id_number)
+  found = data.find { |element|  element[:national_id] === id_input}
+  target_id = "Failed to add: National ID already exists." if found
 
   #If not Input a new id,name and age
   unless target_id
 
     puts "Please input your name"
-    person.name = gets.chomp
+    new_name = gets.chomp
 
     puts "Please input your age"
-    person.age = gets.to_i
+    new_age = gets.to_i
 
-    person.save
+    data.push({
+                national_id: id_input,
+                name: new_name,
+                age: new_age
+              })
   else
     puts target_id
+
   end
-  puts person.details
+  puts data.last(5)
 end
 
 # DELETE  Function
-def delete
+def delete(data)
   puts "Input an ID to delete: "
   id_input = gets.chomp.to_i
 
-  found = Person.find_by_national_id(id_input)
+  found = data.find { |element|  element[:national_id] == id_input}
   p "User not found." unless found
 
   if found
-    Person.all.delete(found)
+    data.delete(found)
     p "Successfully Deleted"
-    puts "Updated Data: "
 
-    Person.show_all
+    puts "Updated Data: "
+    puts data.first(5)
   end
 end
 
-
 # Edit Function
-def edit
+def edit(data)
   puts "Please input your ID to edit"
-  user_id = gets.chomp.to_i
+  user_id = gets.to_i
 
-  found = Person.find_by_national_id(user_id)
-  target = "Person not found" unless found
-  puts target
+  person = data.find { |element| element[:national_id] == user_id }
 
-  if found
-    person = Person.new
-    puts "Please input a new name:"
-    person.name = gets.chomp
+  puts "Please input the changes you want in your name:"
+  new_name = gets.chomp
 
-    puts "Please input a new age:"
-    person.age = gets.chomp.to_i
+  puts "Please input the changes you want in your age:"
+  new_age = gets.chomp.to_i
 
+  if person
+    person[:name] = new_name
+    person[:age] = new_age
   end
+  puts person
 end
 
 #Search Function
-=begin
 def search(data)
   puts "Please input your 1(name) or 2(id)"
   user_input = gets.chomp.to_i
@@ -229,12 +229,9 @@ def search(data)
     end
   end
 end
-=end
 
 
 
-
-continue = true
 while continue
   puts "[1] ADD"
   puts "[2] DELETE"
@@ -244,38 +241,29 @@ while continue
 
   case chosen_action
   when 1
-    add
+    add(persons)
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
-    system("Clear") || system("cls")
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   when 2
-    delete
+    delete(persons)
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
-    system("Clear") || system("cls")
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   when 3
-    edit
+    edit(persons)
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
-    system("Clear") || system("cls")
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   when 4
     search(persons)
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
-    system("Clear") || system("cls")
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   end
 end
-
-
-
-
-
-
+=end
