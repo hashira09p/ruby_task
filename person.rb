@@ -34,8 +34,8 @@ class Person
     data
   end
 
-  def self.find_by_name(name)
-    @@records.find{|element| element.name == name}
+  def self.find_by_name(name_input)
+    @@records.find{|element| element.name == name_input}
   end
   def details
     "Name: #{name}, Age: #{age}, National_ID: #{id_number}"

@@ -203,8 +203,7 @@ def edit
 end
 
 #Search Function
-=begin
-def search(data)
+def search
   puts "Please input your 1(name) or 2(id)"
   user_input = gets.chomp.to_i
 
@@ -212,11 +211,13 @@ def search(data)
   when 1
     puts "Please input your name"
     name = gets.chomp
-    person = data.find {|element| element[:name] == name}
+    person = Person.find_by_name(name)
+    found = "User not Found." unless person
+
     if person
-      puts person
+      puts "Name: #{person.name}, Age: #{person.age}, National ID: #{person.id_number}"
     else
-      puts "User not Found."
+      puts found
     end
 
   when 2
@@ -230,7 +231,6 @@ def search(data)
     end
   end
 end
-=end
 
 
 
@@ -266,7 +266,7 @@ while continue
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   when 4
-    search(persons)
+    search
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
     system("Clear") || system("cls")
