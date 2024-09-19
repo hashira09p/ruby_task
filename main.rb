@@ -223,11 +223,13 @@ def search
   when 2
     puts "Please input your id"
     id = gets.chomp.to_i
-    person = data.find {|element| element[:national_id] == id}
+    person = Person.find_by_national_id(id)
+    found = "User not Found." unless person
+
     if person
-      puts person
+      puts "Name: #{person.name}, Age: #{person.age}, National ID: #{person.id_number}"
     else
-      puts "User not Found."
+      puts found
     end
   end
 end
