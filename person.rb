@@ -34,8 +34,23 @@ class Person
     data
   end
 
+  def last
+    @@records.last(5)
+  end
+
+  def first
+    @@records.first(5)
+  end
+
   def self.find_by_name(name_input)
     @@records.find{|element| element.name == name_input}
+  end
+  def destroy
+    @@records.delete(self)
+  end
+
+  def destroy_all
+    @@records.clear
   end
   def details
     "Name: #{name}, Age: #{age}, National_ID: #{id_number}"

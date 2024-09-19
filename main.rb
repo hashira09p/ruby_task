@@ -160,7 +160,9 @@ def add
   else
     puts target_id
   end
-  puts person.details
+  person.last.each do |person|
+    puts "Name: #{person.name}, Age: #{person.age}, National ID: #{person.id_number}"
+  end
 end
 
 # DELETE  Function
@@ -234,6 +236,11 @@ def search
   end
 end
 
+def delete_all
+  person = Person.new
+  person.destroy_all
+end
+
 
 
 
@@ -241,8 +248,10 @@ continue = true
 while continue
   puts "[1] ADD"
   puts "[2] DELETE"
-  puts "[3] EDIT"
-  puts "[4] SEARCH"
+  puts "[3] DELETE ALL"
+  puts "[4] EDIT"
+  puts "[5] SEARCH"
+
   chosen_action = gets.chomp.to_i
 
   case chosen_action
@@ -261,13 +270,20 @@ while continue
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   when 3
-    edit
+    delete_all
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
     system("Clear") || system("cls")
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   when 4
+    edit
+    p "Do You want to exit? Press Y/N."
+    decision = gets.chomp.upcase
+    system("Clear") || system("cls")
+    continue = false if decision == "Y"
+    system("Clear") || system("cls")
+  when 5
     search
     p "Do You want to exit? Press Y/N."
     decision = gets.chomp.upcase
@@ -275,6 +291,7 @@ while continue
     continue = false if decision == "Y"
     system("Clear") || system("cls")
   end
+
 end
 
 
