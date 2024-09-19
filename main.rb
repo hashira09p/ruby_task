@@ -184,21 +184,22 @@ end
 # Edit Function
 def edit
   puts "Please input your ID to edit"
-  user_id = gets.chomp.to_i
+  person = Person.new
+  person.id_number = gets.chomp.to_i
 
-  found = Person.find_by_national_id(user_id)
+  found = Person.find_by_national_id(person.id_number)
   target = "Person not found" unless found
-  puts target
 
   if found
-    person = Person.new
     puts "Please input a new name:"
     person.name = gets.chomp
 
     puts "Please input a new age:"
     person.age = gets.chomp.to_i
-
+  elsif
+    puts target
   end
+  p person.update.details
 end
 
 #Search Function

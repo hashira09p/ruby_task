@@ -27,6 +27,13 @@ class Person
     @@records.find{|element| element.id_number == id_input}
   end
 
+  def update
+    data = Person.find_by_national_id(id_number)
+    data.name = name
+    data.age = age
+    data
+  end
+
   def self.find_by_name(name)
     @@records.find{|element| element.name == name}
   end
@@ -35,11 +42,7 @@ class Person
   end
 end
 
-person = Person.new
-person.name = "Jerome"
-person.age = 23
-person.id_number = 27
-person.save
+
 
 # =begin
 # puts f_person.details=end
